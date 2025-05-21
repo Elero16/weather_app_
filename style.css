@@ -1,0 +1,291 @@
+/* Общие стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    transition: background 1s ease;
+    position: relative;
+}
+
+.container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    max-width: 400px;
+    width: 90%;
+    animation: fadeIn 1s ease-in-out;
+    z-index: 10;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.search-box {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    padding: 12px;
+    width: 70%;
+    border: none;
+    border-radius: 25px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+input[type="text"]:focus {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+button {
+    padding: 12px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 25px;
+    background: #ff7e5f;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+
+button:hover {
+    background: #feb47b;
+    transform: scale(1.05);
+}
+
+.weather-card {
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease;
+}
+
+.weather-card img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+.weather-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.weather-card p {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.theme-toggle {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    background: #6a11cb;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background: #8c33ff;
+    transform: scale(1.05);
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Светлая тема */
+.light-mode {
+    background: linear-gradient(135deg, #ffecd2, #fcb69f);
+    color: #333;
+}
+
+.light-mode .container {
+    background: rgba(255, 255, 255, 0.5);
+    color: #333;
+}
+
+.light-mode input[type="text"] {
+    background: rgba(255, 255, 255, 0.5);
+    color: #333;
+}
+
+/* Тёмная тема */
+.dark-mode {
+    background: linear-gradient(135deg, #2c3e50, #4ca1af);
+    color: #fff;
+}
+
+.dark-mode .container {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* Солнце и облака для светлой темы */
+.sun-and-clouds {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100px;
+    z-index: 1;
+}
+
+.sun {
+    width: 100px;
+    height: 100px;
+    background: #fcd34d;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: sunRise 10s infinite alternate ease-in-out;
+}
+
+.cloud {
+    position: absolute;
+    top: -20px;
+    left: -50px;
+    width: 150px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50px;
+    animation: cloudMove 15s infinite linear;
+}
+
+.cloud::before,
+.cloud::after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+}
+
+.cloud::before {
+    width: 60px;
+    height: 60px;
+    top: -20px;
+    left: 20px;
+}
+
+.cloud::after {
+    width: 40px;
+    height: 40px;
+    top: -10px;
+    left: 80px;
+}
+
+@keyframes sunRise {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes cloudMove {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100vw);
+    }
+}
+
+/* Звёзды для тёмной темы */
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle 3s infinite ease-in-out;
+}
+
+.star:nth-child(1) {
+    top: 10%;
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.star:nth-child(2) {
+    top: 25%;
+    left: 50%;
+    animation-delay: 1s;
+}
+
+.star:nth-child(3) {
+    top: 40%;
+    left: 70%;
+    animation-delay: 2s;
+}
+
+.star:nth-child(4) {
+    top: 60%;
+    left: 30%;
+    animation-delay: 0.5s;
+}
+
+.star:nth-child(5) {
+    top: 80%;
+    left: 80%;
+    animation-delay: 1.5s;
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
